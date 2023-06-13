@@ -5,11 +5,48 @@
   <!-- Include the Google Material UI CSS -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <style>
+    /* CSS for the preloader */
+    .preloader-wrapper {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+    }
+
+    .preloader-wrapper.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <h3>Storage Calculator</h3>
-    
+
+    <!-- Preloader -->
+    <div class="preloader-wrapper">
+      <div class="preloader">
+        <div class="spinner-layer spinner-red">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- User Input Form -->
     <form id="userForm">
       <h4>User Storage</h4>
@@ -31,7 +68,7 @@
       </div>
       <button class="btn waves-effect waves-light" type="submit" id="userSubmitBtn">Calculate User Storage</button>
     </form>
-    
+
     <!-- Vendor Input Form -->
     <form id="vendorForm">
       <h4>Vendor Storage</h4>
@@ -53,77 +90,92 @@
       </div>
       <button class="btn waves-effect waves-light" type="submit" id="vendorSubmitBtn">Calculate Vendor Storage</button>
     </form>
-    
+
     <!-- Result Display -->
     <div id="resultContainer"></div>
   </div>
 
-  <footer>
-    Developed by <span id="developername"></span> <span id="year"></span> All right served.
+  <footer class="text-c">
+    Developed by <span id="developername"></span> <span id="year"></span> All rights served.
   </footer>
 
-
-
-
-
-
-  
   <!-- Include the Google Material UI JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  
+
   <script>
+
+    let developerName = ["Kyaw San"];
+
+
     // Function to calculate user storage
     function calculateUserStorage(event) {
       event.preventDefault();
-      
+      showPreloader();
+
       const numUsers = document.getElementById('numUsers').value;
       const numUserImages = document.getElementById('numUserImages').value;
       const minUserImgSize = document.getElementById('minUserImgSize').value;
       const maxUserImgSize = document.getElementById('maxUserImgSize').value;
-      
+
       const minStorage = numUsers * numUserImages * minUserImgSize;
       const maxStorage = numUsers * numUserImages * maxUserImgSize;
 
-      // const developername = ["Kyaw San"];
-      // document.getElementById("developername").innerHTML = developername[0];
-
-      // let getYear = new Date();
-      // let thisYear = getYear.getUTCFullYear();
-
-      
       displayResult(`User Storage: Minimum - ${formatSize(minStorage)} GB, Maximum - ${formatSize(maxStorage)} GB`);
+
+      hidePreloader();
     }
-    
+
     // Function to calculate vendor storage
     function calculateVendorStorage(event) {
       event.preventDefault();
-      
+      showPreloader();
+
       const numVendors = document.getElementById('numVendors').value;
       const numVendorImages = document.getElementById('numVendorImages').value;
       const minVendorImgSize = document.getElementById('minVendorImgSize').value;
       const maxVendorImgSize = document.getElementById('maxVendorImgSize').value;
-      
+
       const minStorage = numVendors * numVendorImages * minVendorImgSize;
       const maxStorage = numVendors * numVendorImages * maxVendorImgSize;
-      
+
       displayResult(`Vendor Storage: Minimum - ${formatSize(minStorage)} GB, Maximum - ${formatSize(maxStorage)} GB`);
+
+      hidePreloader();
     }
-    
+
     // Function to display the result
     function displayResult(result) {
       const resultContainer = document.getElementById('resultContainer');
       resultContainer.innerHTML = `<p>${result}</p>`;
     }
-    
+
     // Function to format storage size in GB
     function formatSize(sizeInKB) {
       const sizeInGB = sizeInKB / (1024 * 1024);
       return sizeInGB.toFixed(2);
     }
-    
+
+    // Function to show the preloader
+    function showPreloader() {
+      const preloader = document.querySelector('.preloader-wrapper');
+      preloader.classList.add('active');
+    }
+
+    // Function to hide the preloader
+    function hidePreloader() {
+      const preloader = document.querySelector('.preloader-wrapper');
+      preloader.classList.remove('active');
+    }
+
     // Attach event listeners to the forms
     document.getElementById('userForm').addEventListener('submit', calculateUserStorage);
     document.getElementById('vendorForm').addEventListener('submit', calculateVendorStorage);
+
+    // Update developer name and year
+    const developerNameSpan = document.getElementById('developername');
+    const yearSpan = document.getElementById('year');
+    developerNameSpan.textContent = developerName[0]; 
+    yearSpan.textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
