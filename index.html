@@ -2,115 +2,235 @@
 <html>
 <head>
   <title>Storage Calculator</title>
-  <!-- Include the Google Material UI CSS -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Include the Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+  <!-- Include the Raleway font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+
+
+
+
+
+  
   <style>
-    /* CSS for the preloader */
-    .preloader-wrapper {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 9999;
+    /* Additional custom styles */
+    
+    
+
+    .loadings{ 
+      width: 50%;
+      /*background: orange;*/
+      /*text-align: center;*/
+      text-align: left;
+      /*color: orange;*/
+
+      margin: auto;
+      /*padding: 10px;*/
+
+      border-right: 2px solid #fff;
+
+      position: relative;
+
+      z-index: 1;
+
+      transition: all 2s linear;
+
+      overflow: hidden;
+
+      animation : loadings 3.9s linear infinite; 
+
+      
     }
 
-    .preloader-wrapper.active {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    @keyframes loadings {
+      0%{
+        left: 0;
+         width: 0%;
+
+      }
+
+      50%{
+        width: 25%;
+      }
+
+      100%{
+        width: 0%;
+      }
     }
+
+    .loadings:hover{
+      border-left: none;
+      border-right: 2px solid orange;
+      color: orange;
+    }
+
+    .actives{
+      color: #fff;
+    }
+              
+   
   </style>
 </head>
 <body>
-  <div class="container">
-    <h3>Storage Calculator</h3>
+  <header>
+    <nav class="navbar navbar-expand-md bg-primary navbar-dark fixed-top py-3 ">
+      <a class="navbar-brand" href="#"><span>Intelli</span><span>Task</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav ">
+          <li class="nav-item">
+            <a class="nav-link active" href="#userForm ">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#vendorForm">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#userForm">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="weatherapp.html">Weather</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#vendorForm">Let's talk</a>
+          </li>
+        </ul>
+        
+      </div>
+    </nav>
+  </header>
 
-    <!-- Preloader -->
-    <div class="preloader-wrapper">
-      <div class="preloader">
-        <div class="spinner-layer spinner-red">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div>
-          <div class="gap-patch">
-            <div class="circle"></div>
-          </div>
-          <div class="circle-clipper right">
-            <div class="circle"></div>
-          </div>
+  <section class="bg-white">
+    <div class="container">
+      <h3 class="mt-3">Storage Calculator</h3>
+
+      <!-- User Input Form -->
+      <div class="row mt-5 bg-light p-3 rounded">
+
+        <div class="col-md-6">
+          <form id="userForm">
+            <h4>User Storage</h4>
+            <div class="form-group">
+              <label for="numUsers">Number of Users</label>
+              <input type="number" id="numUsers" class="form-control" min="0" step="1" required>
+            </div>
+            <div class="form-group">
+              <label for="numUserImages">Number of Images per User (5-10000)</label>
+              <input type="number" id="numUserImages" class="form-control" min="1" max="10000" step="1" required>
+            </div>
+            <div class="form-group">
+              <label for="minUserImgSize">Minimum Image Size (100KB)</label>
+              <input type="number" id="minUserImgSize" class="form-control" min="100" max="300" step="1" required>
+            </div>
+            <div class="form-group">
+              <label for="maxUserImgSize">Maximum Image Size (300KB)</label>
+              <input type="number" id="maxUserImgSize" class="form-control" min="100" max="300" step="1" required>
+            </div>
+            <button class="btn btn-primary" type="submit" id="userSubmitBtn">Calculate User Storage</button>
+          </form>
+        </div>
+
+
+
+        <!-- Vendor Input Form -->
+        <div class="col-md-6">
+          <form id="vendorForm">
+            <h4>Vendor Storage</h4>
+            <div class="form-group">
+              <label for="numVendors">Number of Vendors</label>
+              <input type="number" id="numVendors" class="form-control" min="0" step="1" required>
+            </div>
+            <div class="form-group">
+              <label for="numVendorImages">Number of Images per Vendor (30, 50, or 10000)</label>
+              <input type="number" id="numVendorImages" class="form-control" min="30" max="10000" step="1" required>
+            </div>
+            <div class="form-group">
+              <label for="minVendorImgSize">Minimum Image Size (100KB)</label>
+              <input type="number" id="minVendorImgSize" class="form-control" min="100" max="300" step="1" required>
+            </div>
+            <div class="form-group">
+              <label for="maxVendorImgSize">Maximum Image Size (300KB)</label>
+              <input type="number" id="maxVendorImgSize" class="form-control" min="100" max="300" step="1" required>
+            </div>
+            <button class="btn btn-primary" type="submit" id="vendorSubmitBtn">Calculate Vendor Storage</button>
+          </form>
         </div>
       </div>
-    </div>
 
-    <!-- User Input Form -->
-    <form id="userForm">
-      <h4>User Storage</h4>
-      <div class="input-field">
-        <input type="number" id="numUsers" min="0" step="1" required>
-        <label for="numUsers">Number of Users</label>
+      <!-- Result Display -->
+      <div id="resultContainer" class="mt-4"></div>
       </div>
-      <div class="input-field">
-        <input type="number" id="numUserImages" min="5" max="10" step="1" required>
-        <label for="numUserImages">Number of Images per User (5-10)</label>
-      </div>
-      <div class="input-field">
-        <input type="number" id="minUserImgSize" min="100" max="300" step="1" required>
-        <label for="minUserImgSize">Minimum Image Size (100KB)</label>
-      </div>
-      <div class="input-field">
-        <input type="number" id="maxUserImgSize" min="100" max="300" step="1" required>
-        <label for="maxUserImgSize">Maximum Image Size (300KB)</label>
-      </div>
-      <button class="btn waves-effect waves-light" type="submit" id="userSubmitBtn">Calculate User Storage</button>
-    </form>
 
-    <!-- Vendor Input Form -->
-    <form id="vendorForm">
-      <h4>Vendor Storage</h4>
-      <div class="input-field">
-        <input type="number" id="numVendors" min="0" step="1" required>
-        <label for="numVendors">Number of Vendors</label>
-      </div>
-      <div class="input-field">
-        <input type="number" id="numVendorImages" min="30" max="70" step="10" required>
-        <label for="numVendorImages">Number of Images per Vendor (30, 50, or 70)</label>
-      </div>
-      <div class="input-field">
-        <input type="number" id="minVendorImgSize" min="100" max="300" step="1" required>
-        <label for="minVendorImgSize">Minimum Image Size (100KB)</label>
-      </div>
-      <div class="input-field">
-        <input type="number" id="maxVendorImgSize" min="100" max="300" step="1" required>
-        <label for="maxVendorImgSize">Maximum Image Size (300KB)</label>
-      </div>
-      <button class="btn waves-effect waves-light" type="submit" id="vendorSubmitBtn">Calculate Vendor Storage</button>
-    </form>
 
-    <!-- Result Display -->
-    <div id="resultContainer"></div>
-  </div>
+   
+  </section>
 
-  <footer class="text-c">
+    <section class="bg-light text-white p-5">
+      <div class="container">
+      <h3 class="display-4 text-primary text-center mt-3 mb-5 py-2 titles">Myanmar All Country City Weather</h3>
+
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <!-- City Selection Form -->
+          <form id="cityForm" class="bg-white text-white p-3 rounded">
+            <h4 class="text-muted my-3">Select City</h4>
+            <div class="form-group">
+
+              <label for="citySelect" class="text-muted">City</label>
+              <select id="citySelect" class="form-control" required>
+                <option value="" contenteditable="false">Select a city</option>
+                <option value="Yangon">Yangon</option>
+                <option value="Mandalay">Mandalay</option>
+                <option value="Taunggyi ">Taunggyi </option>
+                 <option value="Lashio">Lashio</option>
+                <option value="Mawlamyine">Mawlamyine</option>
+                <option value="Pathein">Pathein</option>
+                <option value="Magway">Magway</option>
+                <option value="Kalay">Kalay</option>
+                <option value="Myitkyina">Myitkyina</option>
+
+                <!-- Add more city options here -->
+              </select>
+            </div>
+          <div class="rounded-0 my-3">
+             <button class="btn btn-primary" type="submit" id="citySubmitBtn">Get Weather</button>
+            <button type="submit" id="downloadcsv" class="btn btn-primary">Download Weather Data</button>
+          </div>
+          </form>
+        </div>
+
+        <!-- Weather Display Container -->
+        <div class="col-md-6 p-5">
+          <div id="weather-container">
+            <form class="weather-data">
+              <h3 id="weather-progress" class="text-muted loadings">Loading...</h3>
+            </form>
+          </div>
+        </div>
+         
+      </div>
+      </div>
+    </section>
+
+
+  <footer class="bg-dark text-white text-center py-3 mt-5">
     Developed by <span id="developername"></span> <span id="year"></span> All rights served.
   </footer>
 
-  <!-- Include the Google Material UI JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!-- Include the Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   <script>
-
     let developerName = ["Kyaw San"];
-
 
     // Function to calculate user storage
     function calculateUserStorage(event) {
       event.preventDefault();
-      showPreloader();
+      //showPreloader();
 
       const numUsers = document.getElementById('numUsers').value;
       const numUserImages = document.getElementById('numUserImages').value;
@@ -122,13 +242,13 @@
 
       displayResult(`User Storage: Minimum - ${formatSize(minStorage)} GB, Maximum - ${formatSize(maxStorage)} GB`);
 
-      hidePreloader();
+      //hidePreloader();
     }
 
     // Function to calculate vendor storage
     function calculateVendorStorage(event) {
       event.preventDefault();
-      showPreloader();
+      //showPreloader();
 
       const numVendors = document.getElementById('numVendors').value;
       const numVendorImages = document.getElementById('numVendorImages').value;
@@ -149,33 +269,120 @@
       resultContainer.innerHTML = `<p>${result}</p>`;
     }
 
-    // Function to format storage size in GB
-    function formatSize(sizeInKB) {
-      const sizeInGB = sizeInKB / (1024 * 1024);
-      return sizeInGB.toFixed(2);
+    // Function to format the size in GB
+    function formatSize(size) {
+      return (size / (1024 * 1024)).toFixed(2);
     }
 
     // Function to show the preloader
     function showPreloader() {
       const preloader = document.querySelector('.preloader-wrapper');
-      preloader.classList.add('active');
+      //preloader.classList.add('active');
     }
 
     // Function to hide the preloader
     function hidePreloader() {
       const preloader = document.querySelector('.preloader-wrapper');
-      preloader.classList.remove('active');
+      //preloader.classList.remove('active');
     }
 
-    // Attach event listeners to the forms
+    // Set developer name and year in the footer
+    const developerNameElement = document.getElementById('developername');
+    const yearElement = document.getElementById('year');
+    developerNameElement.textContent = developerName.join(', ');
+    yearElement.textContent = new Date().getFullYear();
+
+    // progress count
+    // const weatherProgressCount = document.getElementById("weather-progress");
+    // console.log(weatherProgressCount);
+    // for(let i = 0; i<=100; i++){
+    //   weatherProgressCount.textContent = i + "%";
+    // }
+    
+
+    // Event listeners for form submission
     document.getElementById('userForm').addEventListener('submit', calculateUserStorage);
     document.getElementById('vendorForm').addEventListener('submit', calculateVendorStorage);
 
-    // Update developer name and year
-    const developerNameSpan = document.getElementById('developername');
-    const yearSpan = document.getElementById('year');
-    developerNameSpan.textContent = developerName[0]; 
-    yearSpan.textContent = new Date().getFullYear();
+     // Replace 'YOUR_API_KEY' with your actual API key
+    const apiKey = '6c485b722822a98c1a22e3bf91cdbefc';
+    
+    const cityForm = document.getElementById('cityForm');
+    const citySelect = document.getElementById('citySelect');
+    const weatherContainer = document.getElementById('weather-container');
+
+    // Function to fetch and display weather data for the selected city
+    const getWeatherData = (city) => {
+      // Fetch weather data from the API
+      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city},MM&appid=${apiKey}&units=metric`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.cod !== 200) {
+            // Display an error message if there is an issue with fetching the data
+            throw new Error(data.message || 'Error fetching weather data');
+          }
+
+          console.log(citySelect.value);
+
+          // Extract relevant information from the API response
+          const temperature = data.main?.temp;
+          const description = data.weather[0]?.description;
+          const icon = data.weather[0]?.icon;
+
+          // Create HTML elements to display the weather information
+          const temperatureElement = document.createElement('h3');
+          temperatureElement.innerHTML = temperature ? `<h5 class='text-success'> Temperature: ${temperature}°C in ${citySelect.value} </h5> `  : '<h5 class="text-info">Temperature: Not Available</h5>';
+
+          const descriptionElement = document.createElement('p');
+          descriptionElement.innerHTML = description ? `<p class="text-muted lead" style="font-size:16px;"> Description: ${description} ${citySelect.value} </p>`  : '<h5 class="text-info">Description</h5>: Not Available';
+
+          const iconElement = document.createElement('img');
+          iconElement.src = icon ? `http://openweathermap.org/img/w/${icon}.png` : '';
+          iconElement.alt = description || '';
+
+          // Append the elements to the weather container
+          weatherContainer.innerHTML = '';
+          weatherContainer.appendChild(temperatureElement);
+          weatherContainer.appendChild(descriptionElement);
+          weatherContainer.appendChild(iconElement);
+        })
+        .catch(error => {
+          // Display an error message if there is an issue with fetching the data
+          weatherContainer.innerHTML = `<h3 class='text-info'>Error: ${error.message}</h3>`;
+        });
+    };
+
+    // Handle form submission
+    cityForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const selectedCity = citySelect.value;
+      if (selectedCity) {
+        getWeatherData(selectedCity);
+      }
+    });
+
+     document.getElementById('weather-data').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Get form values
+      var city = document.getElementById('citySelect').value;
+      var startDate = new Date().getDay();
+      // var endDate = document.getElementById('end').value;
+
+      // Create CSV data
+      var csvContent = "data:text/csv;charset=utf-8,";
+      csvContent += "City,Date,Temp (C),Humidity\n";
+      csvContent += city + "," +  ` start date ${startDate}, `  ;
+      csvContent += city + "," + "22,75\n";
+
+      // Create a link element
+      var link = document.createElement('a');
+      link.href = encodeURI(csvContent);
+      link.download = city + "_weather_data.csv";
+
+      // Simulate a click to trigger the download
+      link.click();
+    });
   </script>
 </body>
 </html>

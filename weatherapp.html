@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">   
+  <title>Weather App</title>
+  <style>
+     body {
+      background-color: #f5f5f5;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-control {
+      height: 40px;
+    }
+
+    .btn-primary {
+      width: 100%;
+      height: 40px;
+      font-size: 16px;
+      background-color: #007bff;
+      border: none;
+    }
+
+    .weather-info {
+      text-align: center;
+      margin-top: 30px;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+    }
+
+    .weather-info h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .weather-icon {
+      font-size: 72px;
+      margin-bottom: 20px;
+    }
+
+    .weather-info p {
+      margin-bottom: 10px;
+    }
+
+    i{
+      color: orange;
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Weather App</h1>
+    <form id="weatherForm">
+      <input type="text" name="search" id="search" class="form-control " placeholder="Enter city or country to serarch weather data" />
+      <div class="form-group">
+        <label for="cityInput">City:</label>
+
+        <select class="form-control" id="cityInput" required>
+          <option value="">Select a city</option>
+          <!-- Add more regions and their respective cities and states here -->
+          <optgroup label="Ayeyarwady Region">
+            <option value="Pathein">Pathein, Ayeyarwady</option>
+            <option value="Maubin">Maubin, Ayeyarwady</option>
+            <option value="Hinthada">Hinthada, Ayeyarwady</option>
+            <!-- Add more cities of Ayeyarwady Region here -->
+          </optgroup>
+          <optgroup label="Bago Region">
+            <option value="Bago">Bago, Bago</option>
+            <option value="Pyay">Pyay, Bago</option>
+            <option value="Taungoo">Taungoo, Bago</option>
+            <!-- Add more cities of Bago Region here -->
+          </optgroup>
+          <optgroup label="Chin State">
+            <option value="Hakha">Hakha, Chin</option>
+            <option value="Falam">Falam, Chin</option>
+            <option value="Tedim">Tedim, Chin</option>
+            <!-- Add more cities of Chin State here -->
+          </optgroup>
+          <optgroup label="Kachin State">
+            <option value="Myitkyina">Myitkyina, Kachin</option>
+            <option value="Bhamo">Bhamo, Kachin</option>
+            <option value="Putao">Putao, Kachin</option>
+            <!-- Add more cities of Kachin State here -->
+          </optgroup>
+          <optgroup label="Kayah State">
+            <option value="Loikaw">Loikaw, Kayah</option>
+            <option value="Bawlakhe">Bawlakhe, Kayah</option>
+            <option value="Demoso">Demoso, Kayah</option>
+            <!-- Add more cities of Kayah State here -->
+          </optgroup>
+          <optgroup label="Kayin State">
+            <option value="Hpa-an">Hpa-an, Kayin</option>
+            <option value="Kawkareik">Kawkareik, Kayin</option>
+            <option value="Myawaddy">Myawaddy, Kayin</option>
+            <!-- Add more cities of Kayin State here -->
+          </optgroup>
+          <optgroup label="Magway Region">
+            <option value="Magway">Magway, Magway</option>
+            <option value="Yenangyaung">Yenangyaung, Magway</option>
+            <option value="Pakokku">Pakokku, Magway</option>
+            <!-- Add more cities of Magway Region here -->
+          </optgroup>
+          <optgroup label="Mandalay Region">
+            <option value="Mandalay">Mandalay, Mandalay</option>
+            <option value="Pyin Oo Lwin">Pyin Oo Lwin, Mandalay</option>
+            <option value="Meiktila">Meiktila, Mandalay</option>
+            <!-- Add more cities of Mandalay Region here -->
+          </optgroup>
+          <optgroup label="Mon State">
+            <option value="Mawlamyine">Mawlamyine, Mon</option>
+            <option value="Thaton">Thaton, Mon</option>
+            <option value="Kyaikto">Kyaikto, Mon</option>
+            <!-- Add more cities of Mon State here -->
+          </optgroup>
+          <optgroup label="Rakhine State">
+            <option value="Sittwe">Sittwe, Rakhine</option>
+            <option value="Mrauk U">Mrauk U, Rakhine</option>
+            <option value="Thandwe">Thandwe, Rakhine</option>
+            <!-- Add more cities of Rakhine State here -->
+          </optgroup>
+          <optgroup label="Sagaing Region">
+            <option value="Sagaing">Sagaing, Sagaing</option>
+            <option value="Shwebo">Shwebo, Sagaing</option>
+            <option value="Katha">Katha, Sagaing</option>
+            <!-- Add more cities of Sagaing Region here -->
+          </optgroup>
+          <optgroup label="Shan State">
+            <option value="Taunggyi">Taunggyi, Shan</option>
+            <option value="Kalaw">Kalaw, Shan</option>
+            <option value="Kengtung">Kengtung, Shan</option>
+            <!-- Add more cities of Shan State here -->
+          </optgroup>
+          <optgroup label="Tanintharyi Region">
+            <option value="Dawei">Dawei, Tanintharyi</option>
+            <option value="Myeik">Myeik, Tanintharyi</option>
+            <option value="Kawthaung">Kawthaung, Tanintharyi</option>
+            <!-- Add more cities of Tanintharyi Region here -->
+          </optgroup>
+          <optgroup label="Yangon Region">
+            <option value="Yangon">Yangon, Yangon</option>
+            <option value="Thanlyin">Thanlyin, Yangon</option>
+            <option value="Dala">Dala, Yangon</option>
+            <!-- Add more cities of Yangon Region here -->
+          </optgroup>
+          <optgroup label="Other Regions">
+            <option value="Kyiakto">Kyiakto, Other</option>
+            <option value="Labutta">Labutta, Other</option>
+            <option value="Tachileik">Tachileik, Other</option>
+            <!-- Add more cities of Other Regions here -->
+          </optgroup>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="countrySelect">Country:</label>
+        <select class="form-control" id="countrySelect" required>
+          <option value="">Select a country</option>
+          <option value="MM">Myanmar</option>
+          <!-- Add more countries here -->
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Get Weather</button>
+    </form>
+    <div class="weather-info" id="weatherInfo"></div>
+  </div>
+
+  <script>
+    document.getElementById('weatherForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const city = document.getElementById('cityInput').value;
+      const country = document.getElementById('countrySelect').value;
+      getWeather(city, country);
+    });
+
+    function getWeather(city, country) {
+      // Replace the API_KEY and API_URL with a real weather API of your choice
+      const API_KEY = '6c485b722822a98c1a22e3bf91cdbefc';
+      const API_URL = `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}`;
+
+      // Make a request to the weather API
+      fetch(API_URL)
+        .then(response => response.json())
+        .then(data => {
+          displayWeather(data);
+        })
+        .catch(error => {
+          console.log(error);
+          document.getElementById('weatherInfo').innerHTML = 'Error fetching weather data.';
+        });
+    }
+
+      function displayWeather(weatherData) {
+      const weatherInfo = document.getElementById('weatherInfo');
+      weatherInfo.innerHTML = `
+        <h2>${weatherData.name}</h2>
+        <i class="weather-icon ${getWeatherIcon(weatherData.weather[0].icon)}"></i>
+        <p>Temperature: ${Math.round(weatherData.main.temp - 273.15)}°C</p>
+        <p>Feels like: ${Math.round(weatherData.main.feels_like - 273.15)}°C</p>
+        <p>Humidity: ${weatherData.main.humidity}%</p>
+        <p>Pressure: ${weatherData.main.pressure} hPa</p>
+        <p>Visibility: ${weatherData.visibility / 1000} km</p>
+        <p>Wind Speed: ${weatherData.wind.speed} m/s</p>
+        <p>Wind Direction: ${weatherData.wind.deg}°</p>
+        <p>Conditions: ${weatherData.weather[0].description}</p>
+        <i class="weather-icon' ${(weatherData.weather[0].icon)}"></i>
+      `;
+      weatherInfo.style.opacity = 1;
+    }
+
+    function getWeatherIcon(iconCode) {
+      // Map weather icon codes to FontAwesome icons
+      const iconMap = {
+        '01d': 'fas fa-sun',
+        '01n': 'fas fa-moon',
+        '02d': 'fas fa-cloud-sun',
+        '02n': 'fas fa-cloud-moon',
+        '03d': 'fas fa-cloud',
+        '03n': 'fas fa-cloud',
+        '04d': 'fas fa-cloud',
+        '04n': 'fas fa-cloud',
+        '09d': 'fas fa-cloud-showers-heavy',
+        '09n': 'fas fa-cloud-showers-heavy',
+        '10d': 'fas fa-cloud-sun-rain',
+        '10n': 'fas fa-cloud-moon-rain',
+        '11d': 'fas fa-bolt',
+        '11n': 'fas fa-bolt',
+        '13d': 'fas fa-snowflake',
+        '13n': 'fas fa-snowflake',
+        '50d': 'fas fa-smog',
+        '50n': 'fas fa-smog'
+      };
+
+      return iconMap[iconCode] || 'fas fa-question';
+    }
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>
